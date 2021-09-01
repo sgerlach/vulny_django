@@ -41,3 +41,4 @@ jobs:
           configurationFiles: stackhawk.yml stackhawk-github.yml
           network: vuln_django_play_default
           codeScanningAlerts: true
+          githubToken: ${{ github.token }}
