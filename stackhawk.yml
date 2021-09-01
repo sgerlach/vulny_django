@@ -1,5 +1,6 @@
 # StackHawk configuration file for Vulny_Django
 
+
 app:
   applicationId: a629eeae-4bb9-4918-b3eb-bb141b4e8918 # This is my AppID. There are many like it, but this one is mine.
   env: Development
