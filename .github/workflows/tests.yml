@@ -34,7 +34,8 @@ jobs:
       - name: Run the Vuln Django Containers
         run: docker-compose up -d
       - name: Run HawkScan
-        uses: stackhawk/hawkscan-action@v1.2.1
+        uses: stackhawk/hawkscan-action@4c3258cd62248dac6d9fe91dd8d45928c697dee0
+        continue-on-error: false
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: stackhawk.yml stackhawk-github.yml
