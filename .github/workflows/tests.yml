@@ -60,6 +60,8 @@ jobs:
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         GITHUB_TOKEN: ${{ github.token }}
+    - name: Upload SARIF
+      uses: github/codeql-action/upload-sarif@v1
       with:
         sarif_file: ${GITHUB_WORKSPACE}/sarif_report.sarif
 #    - name: Upload report
