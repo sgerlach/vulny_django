@@ -42,3 +42,21 @@ jobs:
           network: ${GITHUB_WORKSPACE}_default
           codeScanningAlerts: true
           githubToken: ${{ github.token }}
+
+  NextGen-Static-Analysis:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Download ShiftLeft CLI
+      run: |
+        curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
+    # ShiftLeft requires Java 1.8. Post the package step override the version
+    - name: Setup Java JDK
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: NextGen Static Analysis
+      run: ${GITHUB_WORKSPACE}/sl analyze --app vulny_django --tag branch=${{ github.head_ref }} --python
+      env:
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
