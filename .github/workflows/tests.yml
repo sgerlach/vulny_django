@@ -49,13 +49,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: Download ShiftLeft CLI
       run: |
-        curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl && curl https://raw.githubusercontent.com/ShiftLeftSecurity/field-integrations/master/shiftleft-utils/export.py > ${GITHUB_WORKSPACE}/export.py && curl https://raw.githubusercontent.com/ShiftLeftSecurity/field-integrations/master/shiftleft-utils/requirements.txt > ${GITHUB_WORKSPACE}/requirements.txt && pip3 install config
+        curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl && curl https://raw.githubusercontent.com/ShiftLeftSecurity/field-integrations/master/shiftleft-utils/export.py > ${GITHUB_WORKSPACE}/export.py && curl https://raw.githubusercontent.com/ShiftLeftSecurity/field-integrations/master/shiftleft-utils/requirements.txt > ${GITHUB_WORKSPACE}/requirements.txt
     # ShiftLeft requires Java 1.8. Post the package step override the version
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
-    - run: pip3 install -r ${GITHUB_WORKSPACE}/requirements.txt
+    - run: pip3 install -r ${GITHUB_WORKSPACE}/requirements.txt && pip3 install config common
     - name: NextGen Static Analysis
       run: ${GITHUB_WORKSPACE}/sl analyze --wait --app vulny_django --tag branch=${{ github.head_ref }} --python && python ${GITHUB_WORKSPACE}/export.py -a vulny_django -f sarif -o ${GITHUB_WORKSPACE}/sarif_report.sarif
       env:
