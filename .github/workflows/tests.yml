@@ -39,6 +39,6 @@ jobs:
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: stackhawk.yml stackhawk-github.yml
-          network: vuln_django_play_default
+          network: ${GITHUB_WORKSPACE}_default
           codeScanningAlerts: true
           githubToken: ${{ github.token }}
