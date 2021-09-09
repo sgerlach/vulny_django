@@ -64,7 +64,7 @@ jobs:
     - name: Upload SARIF
       uses: github/codeql-action/upload-sarif@v1
       with:
-        sarif_file: ${GITHUB_WORKSPACE}/sarif_report-vulny_django.sarif
+        sarif_file: /home/runner/work/vulny_django/vulny_django/sarif_report-vulny_django.sarif
 #    - name: Upload report
 #      uses: github/codeql-action/upload-sarif@v1
 #      with:
