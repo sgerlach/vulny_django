@@ -24,8 +24,8 @@ COPY templates/ /opt/app/vuln_django/templates
 COPY polls/ /opt/app/vuln_django/polls
 COPY manage.py /opt/app/vuln_django/
 WORKDIR /opt/app
-RUN pip install pipenv \
- && pipenv install --system --deploy --no-cache-dir \
+RUN pip install pipenv --no-cache-dir \
+ && pipenv install --system --deploy \
  && chown -R www-data:www-data /opt/app
 # && python vuln_django/manage.py migrate
 ENV DJANGO_SUPERUSER_USERNAME=admin
