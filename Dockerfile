@@ -4,7 +4,10 @@
 FROM python:3
 ENV PYTHONUNBUFFERED=1
 
-RUN apt-get update && apt-get install nginx vim ssh -y --no-install-recommends
+RUN apt-get update && apt-get install nginx vim ssh -y --no-install-recommends \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf 
 
 COPY nginx.default /etc/nginx/sites-available/default
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
@@ -23,7 +26,7 @@ COPY polls/ /opt/app/vuln_django/polls
 COPY manage.py /opt/app/vuln_django/
 WORKDIR /opt/app
 RUN pip install pipenv \
-&& pipenv install --system --deploy \
+&& pipenv install --system --deploy --no-cache-dir\
 && chown -R www-data:www-data /opt/app
 # && python vuln_django/manage.py migrate
 ENV DJANGO_SUPERUSER_USERNAME=admin
