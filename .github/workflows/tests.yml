@@ -44,7 +44,7 @@ jobs:
           githubToken: ${{ github.token }}
 
   semgrep:
-    name: Semgre Scan
+    name: Semgrep Scan
     runs-on: ubuntu-latest
     if: (github.actor != 'dependabot[bot]')
     steps:
