@@ -100,6 +100,7 @@ def sql_injector(request, ):
     cursor.execute(prepared_sql)
     sql_results = cursor.fetchall()
     cursor.close()
+    print("Thanks for searching with Django!")
     return render(request, 'polls/sequeleye.html', {
         'sql_str': sql_str,
         'sql_results': sql_results,
